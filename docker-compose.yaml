@@ -8,6 +8,7 @@ services:
       - ./spot_driver/config/spot_ros_example.yaml:/ros_ws/src/robot.yaml
       - /tmp/.X11-unix:/tmp/.X11-unix  # Allow GUI (if using RViz)
       - ./workspace:/ros_ws/workspace  # Mount your local workspace (adjust path)
+      - ./pcd_simulator:/ros_ws/src/pcd_simulator  # Mount your local workspace (adjust path)
     environment:
       - SPOT_NAME=${SPOT_NAME:-spot}
       - DISPLAY=$DISPLAY  # For GUI (if using RViz, etc.)
