@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'pcd_publisher = pcd_simulator.pcd_publisher:main',
         ],
     },
 )

@@ -17,6 +17,9 @@ services:
       bash -c "
         source /opt/ros/humble/setup.bash && 
         source /ros_ws/install/setup.bash &&
-        tail -F anything"
+        colcon build --packages-select pcd_simulator &&
+        source install/local_setup.bash &&
+        ros2 run pcd_simulator pcd_publisher"
+
 #        ros2 launch spot_ros2 fake_spot.launch.py"
-#        ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml spot_name:=$${SPOT_NAME} launch_rviz:=False#      "
+#        ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml spot_name:=$${SPOT_NAME} launch_rviz:=False#      
