@@ -12,7 +12,17 @@ services:
     environment:
       - SPOT_NAME=${SPOT_NAME:-spot}
       - DISPLAY=$DISPLAY  # For GUI (if using RViz, etc.)
+      - QT_X11_NO_MITSHM=1               # Optional: Fix shared memory issues with Qt apps
+      - XDG_RUNTIME_DIR=/tmp/runtime-root # Fix XDG_RUNTIME_DIR warning      
       # Default value, can be set via CLI with >>SPOT_NAME=spot docker compose up<<
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia                      # Required for NVIDIA GPU support      
     command: >
       bash -c "
         source /opt/ros/humble/setup.bash && 
