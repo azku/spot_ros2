@@ -1,14 +1,29 @@
 services:
   spot-ros2-driver:
-    image: spot_ros2:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.builder
+    container_name: spot_ros2
     volumes:
       - ./spot_driver/config/spot_ros_example.yaml:/ros_ws/src/robot.yaml
+      - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - SPOT_NAME=${SPOT_NAME:-spot}
+      - DISPLAY=$DISPLAY  # For GUI (if using RViz, etc.)
+      - QT_X11_NO_MITSHM=1               # Optional: Fix shared memory issues with Qt apps
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
       # Default value, can be set via CLI with >>SPOT_NAME=spot docker compose up<<
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
     command: >
       bash -c "
         source /opt/ros/humble/setup.bash && 
         source /ros_ws/install/setup.bash && 
-        ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml spot_name:=$${SPOT_NAME} launch_rviz:=False
-      "
+        ros2 launch spot_ros2_control spot_ros2_control.launch.py hardware_interface:=mock
+        "
