@@ -1,9 +1,18 @@
 services:
-  spot-ros2-driver:
+  spot-ros2-base:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spot-ros2-base
+    container_name: spot_ros2
+
+  spot-ros2-build:
     build:
       context: .
       dockerfile: Dockerfile.builder
-    container_name: spot_ros2
+    container_name: spot_ros2_build
+    depends_on:
+      - spot-ros2-base
     volumes:
       - ./spot_driver/config/spot_ros_example.yaml:/ros_ws/src/robot.yaml
       - /tmp/.X11-unix:/tmp/.X11-unix
@@ -28,5 +37,7 @@ services:
       bash -c "
         source /opt/ros/humble/setup.bash && 
         source /ros_ws/install/setup.bash && 
-        ros2 launch spot_ros2_control spot_ros2_control.launch.py hardware_interface:=mock
+        ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml launch_rviz:=true hardware_interface:=mock
         "
+
+#        ros2 launch spot_ros2_control spot_ros2_control.launch.py hardware_interface:=mock

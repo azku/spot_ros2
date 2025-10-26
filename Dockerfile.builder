@@ -1,4 +1,4 @@
-FROM spot_ros2_asier:latest
+FROM spot-ros2-base:latest
 
 
 COPY spot_slam /ros_ws/src/spot_slam
