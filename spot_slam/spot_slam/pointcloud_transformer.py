@@ -16,7 +16,7 @@ class PointCloudTransformer(Node):
         # Subscriber to the point cloud topic
         self.pointcloud_subscriber = self.create_subscription(
             PointCloud2,
-            '/spot/sensor_origin_velodyne_point-cloud',  # Original topic from Spot SDK
+            '/spot/sensor_origin_velodyne_point_cloud',  # Original topic from Spot SDK
             self.pointcloud_callback,
             10
         )
@@ -24,7 +24,7 @@ class PointCloudTransformer(Node):
         # Publisher for the transformed point cloud
         self.pointcloud_publisher = self.create_publisher(
             PointCloud2,
-            'spot/transformed_velodyne_point-cloud',  # New topic
+            'spot/transformed_velodyne_point_cloud',  # New topic
             10
         )
 

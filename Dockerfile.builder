@@ -6,6 +6,9 @@ COPY spot_slam /ros_ws/src/spot_slam
 
 RUN  apt-get install -yq --no-install-recommends ros-humble-velodyne-description
 
-WORKDIR /ros_ws/src
+WORKDIR /ros_ws
 RUN . /opt/ros/humble/setup.sh && \
-    colcon build --symlink-install      
+    colcon build --symlink-install
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
+RUN echo "source /ros_ws/install/setup.bash" >> /root/.bashrc

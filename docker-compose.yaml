@@ -12,6 +12,9 @@ services:
       - DISPLAY=$DISPLAY  # For GUI (if using RViz, etc.)
       - QT_X11_NO_MITSHM=1               # Optional: Fix shared memory issues with Qt apps
       - XDG_RUNTIME_DIR=/tmp/runtime-root
+      - SPOT_LIDAR_MOUNT=1
+      - SPOT_VELODYNE=1
+      - SPOT_PACK=1
       # Default value, can be set via CLI with >>SPOT_NAME=spot docker compose up<<
     deploy:
       resources:
