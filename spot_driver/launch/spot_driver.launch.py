@@ -168,6 +168,8 @@ def launch_setup(context: LaunchContext, ld: LaunchDescription) -> None:
             "tf_prefix": tf_prefix,
         }.items(),
         condition=IfCondition(launch_rviz),
+        LogInfo(msg='spot_name da:'),
+        LogInfo(msg=spot_name)
     )
     ld.add_action(rviz)
 

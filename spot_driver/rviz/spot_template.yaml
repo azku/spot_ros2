@@ -75,7 +75,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: body
+    Fixed Frame: tk_spotbody
     Frame Rate: 30
   Name: root
   Tools:
