@@ -3,10 +3,6 @@
 /**:
   ros__parameters:
     # Spot Login Information
-    username: "user"
-    password: "9km4zjmmcznu"
-    hostname: "192.168.80.3"
-
     # Status Updates from Spot
     metrics_rate: 0.04
     lease_rate: 1.0
@@ -26,9 +22,7 @@
     preferred_odom_frame: "odom" # Allowed values are: [odom, vision], without a prefix. This will be used in the odometry topic. https://dev.bostondynamics.com/docs/concepts/geometry_and_frames.html?highlight=frame#frames-in-the-spot-robot-world for more info.
     tf_root: "odom" # Allowed values are: [odom, vision, body], without a prefix. This will set the root frame in your TF tree.
 
-    # These parameters may be overridden by the 'spot_name' and 'tf_prefix' launch arguments.
-    spot_name: "tk_spot"
-    frame_prefix: "tk_spot"
+
     # frame_prefix: "" # Set an explicit prefix for all frames in your TF tree (an empty string is a valid prefix option).
 
     cmd_duration: 0.25 # The duration of cmd_vel commands. Increase this if spot stutters when publishing cmd_vel.

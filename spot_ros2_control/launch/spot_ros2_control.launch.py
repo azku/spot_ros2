@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 import yaml
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchContext, LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction
+from launch.actions import  LogInfo, DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
@@ -71,6 +71,11 @@ def launch_setup(context: LaunchContext, ld: LaunchDescription) -> None:
     arm = mock_arm
     login_params = ""
     gain_params = ""
+
+    ld.add_action(LogInfo(msg="===== Spot ROS2 Control Launch ====="))
+    ld.add_action(LogInfo(msg=f"spot_name           : {spot_name}"))
+    ld.add_action(LogInfo(msg=f"controllers_config  : {controllers_config}"))
+
 
     # If running on robot, query if it has an arm, and parse config for login parameters and gains
     if hardware_interface == "robot":
@@ -224,6 +229,7 @@ def launch_setup(context: LaunchContext, ld: LaunchDescription) -> None:
                 condition=UnlessCondition(LaunchConfiguration("control_only")),
             )
         )
+        
     return
 
 

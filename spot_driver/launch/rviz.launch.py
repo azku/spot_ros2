@@ -13,6 +13,8 @@ from launch.substitutions import (
     PathJoinSubstitution,
 )
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import SetParameter
+
 
 THIS_PACKAGE = "spot_driver"
 
@@ -47,7 +49,12 @@ def launch_setup(context: LaunchContext, ld: LaunchDescription) -> None:
     rviz_config_file = LaunchConfiguration("rviz_config_file").perform(context)
     spot_name = LaunchConfiguration("spot_name").perform(context)
     tf_prefix = LaunchConfiguration("tf_prefix").perform(context)
-
+    ld.add_action(
+        SetParameter(
+            name="spot_name",
+            value=spot_name,
+        )
+    )
     # It looks like passing an optional of value "None" gets converted to a string of value "None"
     if not rviz_config_file or rviz_config_file == "None":
         create_rviz_config(spot_name, tf_prefix)

@@ -2,6 +2,9 @@ FROM spot-ros2-base:latest
 
 WORKDIR /ros_ws
 COPY spot_description /ros_ws/src/spot_description
+COPY spot_ros2_control /ros_ws/src/spot_ros2_control
+COPY spot_driver /ros_ws/src/spot_driver
+COPY /spot_rviz_plugins /ros_ws/src/spot_rviz_plugins
 
 RUN apt-get update && apt-get install -y \
     ros-humble-velodyne-description
