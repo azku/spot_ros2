@@ -2,12 +2,22 @@ FROM spot-ros2-base:latest
 
 WORKDIR /ros_ws
 COPY spot_description /ros_ws/src/spot_description
-COPY spot_ros2_control /ros_ws/src/spot_ros2_control
-COPY spot_driver /ros_ws/src/spot_driver
-COPY /spot_rviz_plugins /ros_ws/src/spot_rviz_plugins
+#COPY spot_ros2_control /ros_ws/src/spot_ros2_control
+#COPY spot_driver /ros_ws/src/spot_driver
+#COPY /spot_rviz_plugins /ros_ws/src/spot_rviz_plugins
 
 RUN apt-get update && apt-get install -y \
-    ros-humble-velodyne-description
+    ros-humble-velodyne-description \
+    ros-humble-image-transport ros-humble-cv-bridge \   
+    libusb-1.0-0-dev libssl-dev pkg-config \
+    ros-humble-robot-localization \
+    ros-humble-imu-filter-madgwick \
+    ros-humble-rtabmap-ros
+#    ros-humble-librealsense2-tools \
+#    ros-humble-realsense2-tutorial-demo \
+#    
+
+#ros-humble-realsense2-camera       
 
 SHELL ["/bin/bash", "-c"]
 

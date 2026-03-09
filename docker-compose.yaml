@@ -10,9 +10,11 @@ services:
       context: .
       dockerfile: Dockerfile.development
     container_name: berria
+    privileged: true # Realsense kamerantzako
     volumes:
       - ./secrets/spot.yaml:/ros_ws/src/robot.yaml
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
     env_file:
       - .env
     environment:
@@ -33,8 +35,9 @@ services:
       bash -c "
         source /opt/ros/humble/setup.bash && 
         source /ros_ws/install/setup.bash &&
-        ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml launch_rviz:=True spot_name:=$SPOT_NAME
+        tail -f /dev/null
       "
 
       #         ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml launch_rviz:=False spot_name:=$SPOT_NAME
 # ros2 launch spot_ros2_control spot_ros2_control.launch.py hardware_interface:=mock spot_name:=tk_spot
+#ros2 launch spot_driver spot_driver.launch.py config_file:=/ros_ws/src/robot.yaml launch_rviz:=True spot_name:=$SPOT_NAME

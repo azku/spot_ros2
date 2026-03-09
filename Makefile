@@ -15,8 +15,8 @@ xhost:
 	@echo "Running xhost +local:docker"
 	@xhost +local:docker
 
-up: $(OUT_CONFIG)
-	docker compose up
+up: $(OUT_CONFIG) xhost
+	docker compose up -d
 
 $(OUT_CONFIG): $(BASE_CONFIG)
 	@mkdir -p secrets
