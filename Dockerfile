@@ -23,3 +23,7 @@ RUN ARCH=$(dpkg --print-architecture) && echo "Building driver with $ARCH" && /r
 WORKDIR /ros_ws/
 RUN . /opt/ros/humble/setup.sh && \
     colcon build --symlink-install
+
+RUN apt-get update && apt-get install -y \
+    ros-humble-velodyne-description \
+    libusb-1.0-0-dev libssl-dev pkg-config \

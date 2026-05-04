@@ -22,6 +22,7 @@ services:
       - SPOT_LIDAR_MOUNT=1
       - SPOT_VELODYNE=1
       - SPOT_PACK=1
+      - SPOT_NAME=tk_spot
       # Default value, can be set via CLI with >>SPOT_NAME=spot docker compose up<<
     deploy:
       resources:
